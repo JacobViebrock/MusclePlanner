@@ -1,0 +1,33 @@
+h1 {
+    font-size: 50px;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    text-align: center;
+    color:darksalmon
+
+}
+h2 {
+    font-size: 20px;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    text-align: center;
+    color: teal;
+}
+nav {
+    float: left;
+}
+nav ul {
+    margin: auto;
+    text-align: left;
+    margin-left: auto;
+    margin-right: auto;
+    width: 25%;
+    font-size: 16px;
+    color: turquoise;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    display: inline-block;
+    list-style: none;
+    position: absolute;
+    padding: 10px 5px;
+}
+nav a:hover {
+    background-color: orange;
+}
