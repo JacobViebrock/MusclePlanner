@@ -1,0 +1,22 @@
+head {
+    font-size: x-large;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    text-align: center;
+}
+
+body {
+
+    background-image: url("../JPEG/backgroundImage.jpeg");
+    background-size: cover;
+    background-position: 0vmin;
+    font-size: 20;
+    font-family: 'Times New Roman', Times, serif;
+    text-align: center;
+    color:azure;
+    
+}
+h1 {
+    font-size: 80;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    color: aliceblue;
+}
