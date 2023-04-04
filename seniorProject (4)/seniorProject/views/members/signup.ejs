@@ -1,0 +1,46 @@
+<%- include('../partials/headerLogin.ejs')%>
+
+<div class="header">
+    <h1>Create a New Account</h1>
+</div>
+
+<nav class="topnav">
+    <a href="/">Home</a> 
+    <a href="/members/login">Log In</a> 
+    <a href="/members/signup">Sign Up</a>
+    <a href="/members/faq">FAQ</a>
+</nav>
+
+    <div id="leftHalf"></div>
+
+    <div id="rightHalfSignup">
+        <form action='/members' method='POST'>
+            <label>Enter your First Name: </label>
+                <input type="text" name="firstName" id="firstName" placeholder="First Name"><br><br>
+
+            <label>Enter your Last Name: </label>
+                <input type="text" name="lastName" id="lastName" placeholder="Last Name"><br><br>
+            
+            <label>Enter your Phone Number: </label>
+                <input type="tel" name="phoneNumber" id="phoneNumber" maxlength="10"><br><br>
+            
+            <label>Enter your email address: </label>
+                <input type = "text" name="email" id="email" placeholder="example@email.com"><br><br>
+            
+            <label>Enter a preffered Username: </label>
+                <input type="text" name="username" id= "username" placeholder="Username" minlength='6' maxlength="16"><br><br>
+            
+            <label>Enter a preffered password: </label>
+                <input type="password" name= "password" id="password" placeholder="Password" minlenth="8" maxlength="24"><br><br>
+            
+            <label>Enter a re-enter your password: </label>
+                <input type="password" name= "password" id="password" placeholder="Password" minlength="8" maxlength="24"><br><br>
+
+            <label>Enter your calorie goal: </label>
+                <input type="text" name="calorieGoal" id="calorieGoal" placeholder="2000"><br><br>
+
+            <a href="/members/login"> <input type="button" value="Submit"></a>
+        </form>
+    </div>  
+
+<%- include('../partials/footer.ejs')%>

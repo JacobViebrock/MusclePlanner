@@ -1,0 +1,178 @@
+<%- include('../partials/headerWebsite.ejs')%>
+
+<main>
+    <h1>Welcome to the Muscle Planner</h1>
+    <h2>Your journey to your fitness goal begins here</h2>
+
+    <nav class="topnav">
+        <a href="/">Logout</a> 
+        <a href="/calendar/">Member Home</a>
+        <a href="/calendar/interactive">Calendar</a>
+        <a href="/calendar/workoutScheduler">Workout Scheduler</a>
+    </nav>
+
+    <style>
+        .progress-container {
+          position: relative;
+          display: inline-block;
+          width: 200px;
+          height: 200px;
+          margin: 50px auto;
+        }
+      
+        .progress-bar {
+          stroke: #23d160;
+          stroke-width: 10;
+          fill: none;
+          stroke-linecap: round;
+          transform-origin: center;
+          transform: rotate(-90deg);
+          transition: stroke-dashoffset 0.5s ease-in-out;
+        }
+      
+        .progress-text {
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          text-align: center;
+          font-size: 24px;
+          color: #555;
+        }
+      
+        .current-progress {
+          font-weight: bold;
+          font-size: 24px;
+          color: #23d160;
+        }
+      
+        .progress-label {
+          display: block;
+          font-size: 14px;
+        }
+      
+        .calories-input {
+          font-size: 18px;
+          padding: 5px 10px;
+          margin-right: 10px;
+          border: 2px solid #23d160;
+          border-radius: 5px;
+        }
+      
+        .update-progress-btn {
+          font-size: 18px;
+          padding: 5px 10px;
+          background-color: #23d160;
+          color: white;
+          border: none;
+          border-radius: 5px;
+          cursor: pointer;
+        }
+      
+        .update-progress-btn:hover {
+          background-color: #1e8454;
+        }
+      
+        </style>
+      </head>
+      <body>
+      
+        <div class="progress-container">
+          <svg viewBox="0 0 100 100">
+            <path class="progress-bar" d="M 50,50 m 0,-46 a 46,46 0 1 1 0,92 a 46,46 0 1 1 0,-92"></path>
+          </svg>
+          <div class="progress-text">
+            <span class="current-progress">0</span>
+            
+          </div>
+        </div>
+      
+        <div class="input-container">
+          <label for="calories-input" class="progress-label">Enter Calories Consumed:</label>
+          <input type="number" id="calories-input" class="calories-input">
+          <button class="update-progress-btn" onclick="updateProgressBar()">Update Progress</button>
+        </div>
+      
+         <div class="input-container">
+          <label for="calories-goal-input" class="progress-label">Enter Daily Calorie Goal:</label>
+          <input type="number" id="calories-goal-input" class="calories-input">
+          <button class="update-goal-btn" onclick="saveGoal(), updateProgressBar()">Save Goal</button>
+        </div>
+      
+        <div class="external-links">
+          <h2>External Links</h2>
+          <ul>
+            <li><a href="https://www.mayoclinic.org/healthy-lifestyle/weight-loss/in-depth/calorie-calculator/itt-20402304">Calorie Counter</a></li>
+            
+          </ul>
+        </div>
+        <script type="text/javascript">
+          const progressBar = document.querySelector('.progress-bar');
+          const progressText = document.querySelector('.current-progress');
+          let dailyCalories = localStorage.getItem('calories-goal') || 2000;
+          let consumedCalories = ''; // change this to the user's consumed calories for the day
+      
+          function updateProgressBar() {
+            consumedCalories = document.getElementById('calories-input').value;
+      
+      // check if the value entered is a valid number
+      if (isNaN(consumedCalories)) {
+        progressText.textContent = "Enter a valid number";
+        return;
+      }
+      
+      // convert the value entered to a number
+      consumedCalories = Number(consumedCalories);
+      
+      // check if the value entered is negative
+      if (consumedCalories < 0) {
+        progressText.textContent = "Enter a positive number";
+        return;
+      }
+      
+      const progress = consumedCalories / dailyCalories;
+      const limitedProgress = Math.min(progress, 1); 
+      const offset = 285 - limitedProgress * 285;
+      progressBar.style.strokeDasharray = '285';
+      progressBar.style.strokeDashoffset = offset;
+      
+      // check if the goal has been reached
+      if (consumedCalories >= dailyCalories) {
+        progressText.textContent = "Your goal has been reached!";
+        
+      } else {
+        const caloriesLeft = dailyCalories - consumedCalories;
+        progressText.textContent = "You need " + caloriesLeft + " calories left.";
+      }
+      }
+      
+      function saveGoal() {
+        const caloriesGoalInput = document.getElementById('calories-goal-input');
+        dailyCalories = caloriesGoalInput.value;
+      
+        // check if the value entered is a valid number
+        if (isNaN(dailyCalories)) {
+          alert("Enter a valid number");
+          return;
+        }
+      
+        // convert the value entered to a number
+        dailyCalories = Number(dailyCalories);
+      
+        // check if the value entered is negative
+        if (dailyCalories < 0) {
+          alert("Enter a positive number");
+          return;
+        }
+      
+        // save the daily calorie goal 
+        localStorage.setItem('calories-goal', dailyCalories);
+        alert("Daily calorie goal saved!");
+      }
+      
+      // call the function to set the initial progress bar
+      updateProgressBar();
+        </script>
+</main>
+
+<%- include('../partials/footer.ejs')%>

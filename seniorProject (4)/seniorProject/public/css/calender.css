@@ -1,0 +1,100 @@
+body {
+    text-align: center;
+    align-items: center;
+    background-color: #b8c6db;
+}
+
+input, label {
+    margin:auto;
+    display: block;
+}
+h1 {
+    font-size: 60px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    text-align: center;
+    color: orange
+    
+}
+
+h2 {
+    font-size: 30px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: teal;
+}
+
+h3 {
+    font-size: 15px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: gold;
+}
+
+select {
+    
+    text-align: center;
+    justify-content: center;    
+    display: flex;
+    text-align: left;
+    padding-left: 500px;
+ 
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+td {
+    border: 1px solid black;
+    padding: 10px;
+    text-align: center;
+    vertical-align: top;
+    height: 150px;
+    position: relative;
+}
+td:first-child {
+    color: red;
+}
+td:nth-child(7n+1) {
+    color: blue;
+}
+.meal, .workout {
+position: absolute;
+top: 50%;
+left: 50%;
+transform: translate(-50%, -50%);
+width: 80%;
+height: 80%;
+background-color: rgba(255, 0, 0, 0.5);
+border-radius: 50%;
+z-index: 1;
+display: none; /* initially hide the boxes */
+}
+
+.meal::before, .workout::before {
+content: '';
+position: absolute;
+top: 50%;
+left: 50%;
+transform: translate(-50%, -50%);
+width: 50px;
+height: 50px;
+border-radius: 50%;
+z-index: 2;
+display: block;
+}
+
+.meal::before {
+background-color: #ff9800;
+}
+
+.workout::before {
+background-color: #2196f3;
+}
+.not-current-month {
+color: lightgray;
+}
+
+#month-header {
+font-size: 24px;
+font-weight: bold;
+margin-bottom: 10px;
+}

@@ -1,0 +1,31 @@
+<%- include('../partials/headerLogin.ejs')%>
+
+<div class="header">
+    <h1>Log In</h1>
+</div>
+
+<nav class="topnav">
+    <a href="/">Home</a> 
+    <a href="/members/login">Log In</a> 
+    <a href="/members/signup">Sign Up</a>
+    <a href="/members/faq">FAQ</a>
+</nav>
+
+<div class="row">
+    
+    <div class="column" id="leftHalf"></div>
+
+    <div class="column" id="rightHalf">
+        <form action='/member/login' method='POST'>
+            <label>Enter your Username: </label>
+                <input type="text" name="userName" id="userName" placeholder="Enter your Username"><br><br>
+            <label>Enter your Password: </label>
+                <input type="password" name="password" id="password" placeholder="Enter your Password"><br><br>
+    
+                <a href="/calendar/"> <input type="button" value="Login"></a>
+        </form>
+    </div>
+    
+</div> 
+
+<%- include('../partials/footer.ejs')%>
