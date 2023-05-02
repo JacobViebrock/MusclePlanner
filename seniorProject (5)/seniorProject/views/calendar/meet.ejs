@@ -1,0 +1,36 @@
+<%- include('../partials/headerWebsite.ejs')%>
+
+  <h1 class="header">Meet A Trainer</h1>
+
+  <nav class="topnav">
+    <a href="/">Logout</a> 
+    <a href="/calendar/">Member Home</a>
+    <a href="/calendar/workoutScheduler">Workout Scheduler</a>
+    <a href="/calendar/meetTrainer">Meet With Trainer</a>
+  </nav><br>
+  
+  <img class="centerItems" src="/PNG/Schedule.png"><br>
+  
+  <label class="centerItems">Enter your Full Name</label>
+    <input type = "text" id= "FullName" name = "Fullname" class="centerItems" required><br>
+  <label class="centerItems">Enter your Trainer Name</label>
+    <input type = "text" id= "TrainerName" name = "TrainerName" class="centerItems" required><br>
+  <label class="centerItems"> Select a preferred date: </label>
+    <input type="date" id= "dates" name= "date"  min = "2023-01-01" max = "2023-12-31" class="centerItems"><br>
+  <label class="centerItems">Select a timing frorm the below slot</label>
+    <input type="time" id="time" placeholder="time" class="centerItems"><br>
+  <label class="centerItems">Please enter what do you want to talk about in this meeting</label>
+    <input type = "text" id = "Description" class="centerItems" required><br>               
+  <label class="centerItems">If the timing of the current schedule of the trainers doesn't work for you please enter your availability and when you want to set the meeting </label>
+    <input type = "text" id = "Description" name ="Description" class="centerItems">
+  <div class="container">
+    <button onclick="displayMessage()" class="centerButton">Schedule</button>
+  </div>
+
+  <script type = "text/javascript">
+    function displayMessage(){
+      alert("Thank you for signing up. Your trainer will be in touch with you soon");
+    }
+  </script>
+
+<%- include('../partials/footer.ejs')%>

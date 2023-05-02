@@ -1,0 +1,37 @@
+<%- include('../partials/headerLogin.ejs')%>
+
+<header>
+    <article class="hero-image">
+        <section class="hero-text">
+            <h1 style="font-size:50px">Login</h1>
+            <p>Get to the grind</p>
+        </section>
+    </article>
+    
+    <nav class="topnav">
+        <a href="/">Home</a> 
+        <a href="/members/login">Log In</a> 
+        <a href="/members/signup">Sign Up</a>
+        <a href="/members/faq">FAQ</a>
+        <a href="/members/slides">Muscle of the Week</a>
+    </nav>
+</header>
+
+<div class="row">
+    
+    <div class="column" id="leftHalf"></div>
+
+    <div class="column" id="rightHalf">
+        <form action='/members/login' method='POST'>
+            <label>Enter your Email: </label>
+                <input type="text" name="email" id="email" placeholder="Enter your Email"><br><br>
+            <label>Enter your Password: </label>
+                <input type="password" name="password" id="password" placeholder="Enter your Password"><br><br>
+    
+            <button class="button"> Login </button>
+        </form>
+    </div>
+    
+</div> 
+
+<%- include('../partials/footer.ejs')%>

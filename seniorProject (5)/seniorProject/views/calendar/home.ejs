@@ -1,0 +1,232 @@
+<%- include('../partials/headerWebsite.ejs')%>
+
+  <main>
+    <h1 class="header">Welcome Muscle Planner</h1>
+    <h2>Your journey to your fitness goal begins here</h2>
+
+    </head>
+
+    <body>
+      <nav class="topnav">
+        <a href="/">Logout</a>
+        <a href="/calendar/">Member Home</a>
+        <a href="/calendar/workoutScheduler">Workout Scheduler</a>
+        <a href="/calendar/meetTrainer">Meet With Trainer</a>
+      </nav>
+
+      <div class="centerItems">
+        <div id="workoutModal" class="modal">
+          <div class="modal-content">
+            <span class="close">&times;</span>
+            <form id="workoutForm">
+              <label for="workoutTitle">Workout Title:</label>
+              <input type="text" id="workoutTitle" name="workoutTitle" required>
+              <label for="workoutTime">Workout Time:</label>
+              <input type="time" id="workoutTime" name="workoutTime" required>
+              <input type="submit" value="Save" class="button">
+            </form>
+          </div>
+        </div>
+
+        <h2>Please select your preferred workout date</h2>
+        <input type="date" id="dates" name="date" min="1" max="31" min="2023-02-26" max="2023-12-31" value="2023-02-26">
+        <div id="calendar"></div>
+        <button id="prevWeek" class="button">Previous Week</button>
+        <button id="nextWeek" class="button">Next Week</button>
+      </div>
+
+      <div class="progress-container">
+        <svg viewBox="0 0 100 100">
+          <path class="progress-bar" d="M 50,50 m 0,-46 a 46,46 0 1 1 0,92 a 46,46 0 1 1 0,-92"></path>
+        </svg>
+        <div class="progress-text">
+          <span class="current-progress">0</span>
+
+        </div>
+      </div>
+      <div class="input-container">
+        <label for="calories-input" class="progress-label">Enter Calories Consumed:</label>
+        <input type="number" id="calories-input" class="calories-input">
+        <button class="update-progress-btn" onclick="updateProgressBar()">Update Progress</button>
+      </div>
+
+      <div class="input-container">
+        <label for="calories-goal-input" class="progress-label">Enter Daily Calorie Goal:</label>
+        <input type="number" id="calories-goal-input" class="calories-input">
+        <button class="button" onclick="saveGoal(), updateProgressBar()">Save Goal</button>
+      </div>
+
+      <div class="external-links">
+        <h2>External Links</h2>
+          <a href="https://www.mayoclinic.org/healthy-lifestyle/weight-loss/in-depth/calorie-calculator/itt-20402304">
+            <img class="centerItems" id="image" src="/PNG/calorieLink.png"><br>
+            <h3 class="centerItems">More on calorie goals</h3><br>
+          </a>
+      </div>
+      <script type="text/javascript">
+        const progressBar = document.querySelector('.progress-bar');
+        const progressText = document.querySelector('.current-progress');
+        let dailyCalories = localStorage.getItem('calories-goal') || 2000;
+        let consumedCalories = ''; // change this to the user's consumed calories for the day
+
+        function updateProgressBar() {
+          consumedCalories = document.getElementById('calories-input').value;
+
+          // check if the value entered is a valid number
+          if (isNaN(consumedCalories)) {
+            progressText.textContent = "Enter a valid number";
+            return;
+          }
+
+          // convert the value entered to a number
+          consumedCalories = Number(consumedCalories);
+
+          // check if the value entered is negative
+          if (consumedCalories < 0) {
+            progressText.textContent = "Enter a positive number";
+            return;
+          }
+
+          const progress = consumedCalories / dailyCalories;
+          const limitedProgress = Math.min(progress, 1);
+          const offset = 285 - limitedProgress * 285;
+          progressBar.style.strokeDasharray = '285';
+          progressBar.style.strokeDashoffset = offset;
+
+          // check if the goal has been reached
+          if (consumedCalories >= dailyCalories) {
+            progressText.textContent = "Your goal has been reached!";
+
+          } else {
+            const caloriesLeft = dailyCalories - consumedCalories;
+            progressText.textContent = "You need " + caloriesLeft + " calories left.";
+          }
+        }
+
+        function saveGoal() {
+          const caloriesGoalInput = document.getElementById('calories-goal-input');
+          dailyCalories = caloriesGoalInput.value;
+
+          // check if the value entered is a valid number
+          if (isNaN(dailyCalories)) {
+            alert("Enter a valid number");
+            return;
+          }
+
+          // convert the value entered to a number
+          dailyCalories = Number(dailyCalories);
+
+          // check if the value entered is negative
+          if (dailyCalories < 0) {
+            alert("Enter a positive number");
+            return;
+          }
+
+          // save the daily calorie goal 
+          localStorage.setItem('calories-goal', dailyCalories);
+          alert("Daily calorie goal saved!");
+        }
+
+        // call the function to set the initial progress bar
+        updateProgressBar();
+
+        const calendar = document.getElementById("calendar");
+        const prevWeek = document.getElementById("prevWeek");
+        const nextWeek = document.getElementById("nextWeek");
+        const workoutModal = document.getElementById("workoutModal");
+        const closeBtn = document.querySelector(".close");
+        const workoutForm = document.getElementById("workoutForm");
+
+        let currentDate = new Date();
+        let workouts = {};
+
+        function renderWeek(date) {
+          calendar.innerHTML = "";
+
+          const startDate = new Date(date);
+          startDate.setDate(startDate.getDate() - startDate.getDay());
+
+          for (let i = 0; i < 7; i++) {
+            const day = document.createElement("div");
+            day.classList.add("day");
+            day.dataset.date = startDate.toISOString().substring(0, 10);
+
+            const title = document.createElement("h3");
+            title.textContent = startDate.toDateString();
+            day.appendChild(title);
+
+            if (workouts[day.dataset.date]) {
+              const workout = document.createElement("p");
+              workout.textContent = `${workouts[day.dataset.date].title} at ${workouts[day.dataset.date].time}`;
+              day.appendChild(workout);
+            }
+
+
+            day.addEventListener("click", openWorkoutModal);
+            calendar.appendChild(day);
+            startDate.setDate(startDate.getDate() + 1);
+          }
+        }
+
+        prevWeek.addEventListener("click", () => {
+          currentDate.setDate(currentDate.getDate() - 7);
+          renderWeek(currentDate);
+        });
+
+        nextWeek.addEventListener("click", () => {
+          currentDate.setDate(currentDate.getDate() + 7);
+          renderWeek(currentDate);
+        });
+
+        function openWorkoutModal(event) {
+          const target = event.currentTarget;
+          const date = target.dataset.date;
+          workoutForm.dataset.date = date;
+          workoutForm.workoutTitle.value = workouts[date]?.title || "";
+          workoutForm.workoutTime.value = workouts[date]?.time || "";
+          workoutModal.style.display = "block";
+        }
+
+
+        closeBtn.addEventListener("click", () => {
+          workoutModal.style.display = "none";
+        });
+
+        window.addEventListener("click", (event) => {
+          if (event.target === workoutModal) {
+            workoutModal.style.display = "none";
+          }
+        });
+
+        workoutForm.addEventListener("submit", (event) => {
+          event.preventDefault();
+          const date = workoutForm.dataset.date;
+          const workoutTitle = workoutForm.workoutTitle.value;
+          const workoutTime = workoutForm.workoutTime.value;
+
+          if (workoutTitle && workoutTime) {
+            workouts[date] = {
+              title: workoutTitle,
+              time: workoutTime
+            };
+          } else {
+            delete workouts[date];
+          }
+
+          localStorage.setItem("workouts", JSON.stringify(workouts));
+          renderWeek(currentDate);
+          workoutModal.style.display = "none";
+        });
+
+        function loadWorkoutsFromLocalStorage() {
+          const savedWorkouts = localStorage.getItem("workouts");
+          if (savedWorkouts) {
+            workouts = JSON.parse(savedWorkouts);
+          }
+        }
+
+        loadWorkoutsFromLocalStorage();
+        renderWeek(currentDate);
+      </script>
+  </main>
+<%- include('../partials/footer.ejs')%>

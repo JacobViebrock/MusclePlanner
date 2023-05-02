@@ -1,0 +1,31 @@
+<%- include('../partials/headerWebsite.ejs')%>
+<h1 class="header">Workout Scheduler</h1>
+
+<nav class="topnav">
+	<a href="/">Logout</a> 
+	<a href="/calendar/">Member Home</a>
+	<a href="/calendar/workoutScheduler">Workout Scheduler</a>
+	<a href="/calendar/meetTrainer">Meet With Trainer</a>
+</nav>
+
+
+<h2>Please answer few questions below for us to create a workout plan</h2>
+<h3>You will receive a call or email from the trainer once we have a plan created according to your requirements</h3>
+       
+   <label> Select a preferred date: </label>
+      <input type="date" id= "dates" name= "date"  min = "2023-01-01" max = "2023-12-31">
+        <br><label>Select a timing frorm the below slot</label>
+        <input type="time" id="time" placeholder="time">
+        <br><label>Select type preffered workout type</label>
+        <select class = "workout options">
+            <option value = "Cardio">Cardio</option>
+            <option value = "High intensity Workout">HIT workout</option>
+            <option value = "At home Wrokout">At home Workout</option>
+            <option value = "Weight Lifting">Weight lifting</option>
+            <option value = "Yoga">Yoga</option>
+            <option value = "Swimming">Swimming</option>
+            <option value = "Zumba">Zumba</option>
+        </select><br>
+        <a href="/calendar/"> <input type="button" value="Schedule"></a>
+
+<%- include('../partials/footer.ejs')%>

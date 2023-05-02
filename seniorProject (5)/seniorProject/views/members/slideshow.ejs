@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="Get in shape and achieve your fitness goals with our comprehensive workout plans! Our website offers a variety of routines tailored to your needs, whether you're a beginner or an experienced athlete. From strength training to cardio, our expertly crafted plans will help you stay motivated and achieve results. Start your fitness journey today and transform your body with our proven workout plans.">
+    <title>Transform Your Body with Effective Workout Plans: Your Ultimate Fitness Guide</title>
+    <link href='https://unpkg.com/css.gg@2.0.0/icons/css/menu-right.css' rel='stylesheet'>
+    <link href='https://unpkg.com/css.gg@2.0.0/icons/css/push-chevron-right-r.css' rel='stylesheet'>
+    <link href='https://unpkg.com/css.gg@2.0.0/icons/css/push-chevron-left-r.css' rel='stylesheet'>
+    <link rel="stylesheet" type="text/css" href="/css/login.css">
+    <script defer src="/JS/script.js"></script>
+</head>
+
+<body>
+    <header>
+        <article class="hero-image" id="defaultOpen">
+            <section class="hero-text">
+                <h1 style="font-size:50px">Effective Workout Plans</h1>
+                <p>Transform Your Body with Effective Workout Plans: Your Ultimate Fitness Guide</p>
+            </section>
+            <svg class="menu-toggle" xmlns="http://www.w3.org/2000/svg"></svg>
+        </article>
+    </header>
+    <main>
+        
+        <article class="our-workouts" id="workouts">
+            <h2>Shared by our members</h2>
+            <div class="slideshow-container">
+
+                <div class="workouts-slides fade">
+                    <div class="slide-index">1 / 3</div>
+                    <img src="/JPG/pic1.jpg" style="width:100%">
+                    <div class="text">Run to stay healthy</div>
+                </div>
+
+                <div class="workouts-slides fade">
+                    <div class="slide-index">2 / 3</div>
+                    <img src="/webp/2.webp" style="width:100%">
+                    <div class="text">Breath the fresh air</div>
+                </div>
+
+                <div class="workouts-slides fade">
+                    <div class="slide-index">3 / 3</div>
+                    <img src="/JPG/pic3.jpg" style="width:100%">
+                    <div class="text">train hard</div>
+                </div>
+
+                <a class="prev" onclick="plusSlides(-1)">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M16.6743 9.1716L15.26 7.75739L11.0174 12L15.26 16.2426L16.6742 14.8284L13.8458 12L16.6743 9.1716Z"
+                            fill="currentColor" />
+                        <path d="M9.96265 8.00007V16.0001H7.96265V8.00007H9.96265Z" fill="currentColor" />
+                        <path fill-rule="evenodd" clip-rule="evenodd"
+                            d="M1 5C1 2.79086 2.79086 1 5 1H19C21.2091 1 23 2.79086 23 5V19C23 21.2091 21.2091 23 19 23H5C2.79086 23 1 21.2091 1 19V5ZM5 3H19C20.1046 3 21 3.89543 21 5V19C21 20.1046 20.1046 21 19 21H5C3.89543 21 3 20.1046 3 19V5C3 3.89543 3.89543 3 5 3Z"
+                            fill="currentColor" />
+                    </svg>
+                </a>
+                <a class="next" onclick="plusSlides(1)">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M7.64429 14.8284L9.0585 16.2426L13.3012 12L9.05853 7.75739L7.64432 9.1716L10.4727 12L7.64429 14.8284Z"
+                            fill="currentColor" />
+                        <path d="M14.3559 16L14.3559 7.99996H16.3559V16H14.3559Z" fill="currentColor" />
+                        <path fill-rule="evenodd" clip-rule="evenodd"
+                            d="M1 5C1 2.79086 2.79086 1 5 1H19C21.2091 1 23 2.79086 23 5V19C23 21.2091 21.2091 23 19 23H5C2.79086 23 1 21.2091 1 19V5ZM5 3H19C20.1046 3 21 3.89543 21 5V19C21 20.1046 20.1046 21 19 21H5C3.89543 21 3 20.1046 3 19V5C3 3.89543 3.89543 3 5 3Z"
+                            fill="currentColor" />
+                    </svg></a>
+
+            </div>
+            <br>
+
+            <div style="text-align:center">
+                <span class="dot" onclick="currentSlide(1)"></span>
+                <span class="dot" onclick="currentSlide(2)"></span>
+                <span class="dot" onclick="currentSlide(3)"></span>
+            </div>
+        </article>
+        <nav class="topnav">
+            <a href="/">Home</a>
+            <a href="/members/login">Log In</a>
+            <a href="/members/signup">Sign Up</a>
+            <a href="/members/faq">FAQ</a>
+            <a href="/members/slides">Muscle of the Week</a>
+        </nav>
+    </main>
+
+    <footer>
+        <div>
+            <br>
+            <p>Contact us at support@Themuscleplanner.com for more information. | &copy; 2023 The Muscle Planner. All
+                rights reserved.</p>
+            <br>
+        </div>
+    </footer>
+</body>
+
+</html>

@@ -1,0 +1,132 @@
+<%- include('../partials/headerWebsite.ejs')%>
+
+	<h1 class="header">Calendar</h1>
+
+	<nav class="topnav">
+		<a href="/">Logout</a>
+		<a href="/calendar/">Member Home</a>
+		<a href="/calendar/interactive">Calendar</a>
+		<a href="/calendar/workoutScheduler">Workout Scheduler</a>
+		<a href="/calendar/meetTrainer">Meet With Trainer</a>
+	</nav>
+
+	<div id="workoutModal" class="modal">
+		<div class="modal-content">
+			<span class="close">&times;</span>
+			<form id="workoutForm">
+				<label for="workoutTitle">Workout Title:</label>
+				<input type="text" id="workoutTitle" name="workoutTitle" required>
+				<label for="workoutTime">Workout Time:</label>
+				<input type="time" id="workoutTime" name="workoutTime" required>
+				<input type="submit" value="Save">
+			</form>
+		</div>
+	</div>
+
+	<h2>Please select your preferred workout date</h2>
+	<input type="date" id="dates" name="date" min="1" max="31" min="2023-02-26" max="2023-12-31" value="2023-02-26">
+	<div id="calendar"></div>
+	<button id="prevWeek">Previous Week</button>
+	<button id="nextWeek">Next Week</button>
+
+	<script>
+		const calendar = document.getElementById("calendar");
+		const prevWeek = document.getElementById("prevWeek");
+		const nextWeek = document.getElementById("nextWeek");
+		const workoutModal = document.getElementById("workoutModal");
+		const closeBtn = document.querySelector(".close");
+		const workoutForm = document.getElementById("workoutForm");
+
+		let currentDate = new Date();
+		let workouts = {};
+
+		function renderWeek(date) {
+			calendar.innerHTML = "";
+
+			const startDate = new Date(date);
+			startDate.setDate(startDate.getDate() - startDate.getDay());
+
+			for (let i = 0; i < 7; i++) {
+				const day = document.createElement("div");
+				day.classList.add("day");
+				day.dataset.date = startDate.toISOString().substring(0, 10);
+
+				const title = document.createElement("h3");
+				title.textContent = startDate.toDateString();
+				day.appendChild(title);
+
+				if (workouts[day.dataset.date]) {
+					const workout = document.createElement("p");
+					workout.textContent = `${workouts[day.dataset.date].title} at ${workouts[day.dataset.date].time}`;
+					day.appendChild(workout);
+				}
+
+
+				day.addEventListener("click", openWorkoutModal);
+				calendar.appendChild(day);
+				startDate.setDate(startDate.getDate() + 1);
+			}
+		}
+
+		prevWeek.addEventListener("click", () => {
+			currentDate.setDate(currentDate.getDate() - 7);
+			renderWeek(currentDate);
+		});
+
+		nextWeek.addEventListener("click", () => {
+			currentDate.setDate(currentDate.getDate() + 7);
+			renderWeek(currentDate);
+		});
+
+		function openWorkoutModal(event) {
+			const target = event.currentTarget;
+			const date = target.dataset.date;
+			workoutForm.dataset.date = date;
+			workoutForm.workoutTitle.value = workouts[date]?.title || "";
+			workoutForm.workoutTime.value = workouts[date]?.time || "";
+			workoutModal.style.display = "block";
+		}
+
+
+		closeBtn.addEventListener("click", () => {
+			workoutModal.style.display = "none";
+		});
+
+		window.addEventListener("click", (event) => {
+			if (event.target === workoutModal) {
+				workoutModal.style.display = "none";
+			}
+		});
+
+		workoutForm.addEventListener("submit", (event) => {
+			event.preventDefault();
+			const date = workoutForm.dataset.date;
+			const workoutTitle = workoutForm.workoutTitle.value;
+			const workoutTime = workoutForm.workoutTime.value;
+
+			if (workoutTitle && workoutTime) {
+				workouts[date] = {
+					title: workoutTitle,
+					time: workoutTime
+				};
+			} else {
+				delete workouts[date];
+			}
+
+			localStorage.setItem("workouts", JSON.stringify(workouts));
+			renderWeek(currentDate);
+			workoutModal.style.display = "none";
+		});
+
+		function loadWorkoutsFromLocalStorage() {
+			const savedWorkouts = localStorage.getItem("workouts");
+			if (savedWorkouts) {
+				workouts = JSON.parse(savedWorkouts);
+			}
+		}
+
+		loadWorkoutsFromLocalStorage();
+		renderWeek(currentDate);
+	</script>
+
+<%- include('../partials/footer.ejs')%>

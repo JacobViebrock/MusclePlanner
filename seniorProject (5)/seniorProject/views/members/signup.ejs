@@ -1,0 +1,54 @@
+<%- include('../partials/headerLogin.ejs')%>
+
+<header>
+    <article class="hero-image">
+        <section class="hero-text">
+            <h1 style="font-size:50px">Sign Up</h1>
+            <p>Start your journey today</p>
+        </section>
+    </article>
+    
+    <nav class="topnav">
+        <a href="/">Home</a> 
+        <a href="/members/login">Log In</a> 
+        <a href="/members/signup">Sign Up</a>
+        <a href="/members/faq">FAQ</a>
+        <a href="/members/slides">Muscle of the Week</a>
+    </nav>
+</header>
+
+    <div id="leftHalf"></div>
+
+    <div class="column" id="rightHalfSignup">
+        <form action='/members' method='POST'>
+            <label>Enter your First Name: </label>
+                <input type="text" name="firstName" id="firstName" placeholder="First Name" required><br><br>
+
+            <label>Enter your Last Name: </label>
+                <input type="text" name="lastName" id="lastName" placeholder="Last Name" required><br><br>
+            
+            <label>Enter your Phone Number: </label>
+                <input type="tel" name="phoneNumber" id="phoneNumber" maxlength="10" required><br><br>
+            
+            <label>Enter your email address: </label>
+                <input type = "text" name="email" id="email" placeholder="example@email.com" required><br><br>
+            
+            <label>Enter a preffered password: </label>
+                <input type="password" name= "password" id="password" placeholder="Password" minlenth="8" maxlength="24" required><br><br>
+
+            <label>Enter your calorie goal: </label>
+                <input type="text" name="calorieGoal" id="calorieGoal" placeholder="2000" required><br><br>
+
+            <label>What is your fitness goal?</label>
+                <select name="fitnessGoal" id="fitnessGoal">
+                    <option value="weightLoss">Lose Weight</option>
+                    <option value="muscleGain">Gain Muscle</option>
+                    <option value="stayFit">Maintain Health</option>
+                    <option value="tone">Get Toned</option>
+                </select> <br><br>
+
+            <button type="submit" class="button">Create Account</button> <br><br>
+        </form>
+    </div>  
+
+<%- include('../partials/footer.ejs')%>
